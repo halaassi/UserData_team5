@@ -29,7 +29,7 @@ public class UserActivityService implements IUserActivityService {
     public void removeUserActivity(String userId, String id) throws SystemBusyException, BadRequestException, NotFoundException {
         Util.validateUserName(userId);
         if (!userActivityMap.containsKey(userId)) {
-            throw new NotFoundException("User does not exist");
+            throw new NotFoundException(" removeUserActivity:-User does not exist");
         }
         try {
             Thread.sleep(100);

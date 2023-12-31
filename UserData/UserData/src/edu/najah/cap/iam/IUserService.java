@@ -9,4 +9,6 @@ public interface IUserService {
     void updateUser(UserProfile user) throws NotFoundException, SystemBusyException, BadRequestException;
     void deleteUser(String userName) throws NotFoundException, SystemBusyException, BadRequestException;
     UserProfile getUser(String userName) throws NotFoundException, SystemBusyException, BadRequestException;
+
+
 }

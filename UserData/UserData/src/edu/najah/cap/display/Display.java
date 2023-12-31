@@ -28,10 +28,10 @@ public class Display implements displayUser{
         }
     }
         private void displayUserDetails(UserProfile user) {
-            logger.info("User Data:");
-            logger.info("Username: " + user.getUserName());
-            logger.info("First Name: " + user.getFirstName());
-            logger.info("Last Name: " + user.getLastName());
-            logger.info("Email: " + user.getEmail());
+            System.out.println("User Data:");
+            System.out.println("Username: " + user.getUserName());
+            System.out.println("First Name: " + user.getFirstName());
+            System.out.println("Last Name: " + user.getLastName());
+            System.out.println("Email: " + user.getEmail());
         }
 }

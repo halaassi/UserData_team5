@@ -15,11 +15,22 @@ import static edu.najah.cap.data.Application.getLoginUserName;
 
 public class SwitchMenu implements Menu {
     private static final Logger logger = Logger.getLogger(SwitchMenu.class);
+
     @Override
     public void menu(int index)  {
         Scanner scanner = new Scanner(System.in);
         IUserService userService = new UserService();
+        UserProfile userProfile = new UserProfile();
         displayUser displayUser = new Display();
+        UserType userType = userProfile.getUserType();
+
+        try {
+            userProfile=userService.getUser(getLoginUserName());
+
+
+        } catch (SystemBusyException | BadRequestException | NotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         switch (index) {
             case 1:
@@ -29,7 +40,7 @@ public class SwitchMenu implements Menu {
               //  2-Upload Data
                 break;
             case 3:
-                logger.info("if you need to Soft delete Click 1 and if you need to hard delete Click 2 ");
+                System.out.println("if you need to Soft delete Click 1 and if you need to hard delete Click 2 ");
                 double num1 = Double.parseDouble(scanner.nextLine());
                 DeletionStrategy deletionStrategy;
 
@@ -37,9 +48,8 @@ public class SwitchMenu implements Menu {
                 {
                     try {
                         UserProfile userToDelete = userService.getUser(getLoginUserName());
-                        String userType = String.valueOf(userToDelete.getUserType());
                         deletionStrategy = new SoftDelete();
-                        deletionStrategy.delete(userToDelete,userType);
+                        deletionStrategy.delete(userToDelete, String.valueOf(userType));
                     } catch (NotFoundException | SystemBusyException | BadRequestException e) {
                         logger.error("Error while soft deleting user", e);
                     }
@@ -50,12 +60,11 @@ public class SwitchMenu implements Menu {
                 {
                     try {
                         UserProfile userToDelete = userService.getUser(getLoginUserName());
-                        String userType = String.valueOf(userToDelete.getUserType());
                         deletionStrategy = new HardDeleteStrategy();
                         deletionStrategy.delete(userToDelete, String.valueOf(userType));
                     }
                     catch (NotFoundException | SystemBusyException | BadRequestException e) {
-                        logger.error("Error while soft deleting user", e);
+                        logger.error("Error while hard deleting user", e);
                     }
                 }
 
@@ -66,7 +75,7 @@ public class SwitchMenu implements Menu {
 
                 break;
             case 5:
-                logger.info("add user name ");
+                System.out.println("add user name ");
                 String userName = scanner.nextLine();
                 UsarAddFromUser adduser;
                 adduser = new adduserfromuser();
@@ -74,10 +83,12 @@ public class SwitchMenu implements Menu {
 
                 break;
             case 6:
-                logger.info("exit the program. Goodbye!");
+                System.out.println("exit the program. Goodbye!");
                 System.exit(0);
+                break;
             default:
-                logger.info("Invalid option. Please choose again.");
+                System.out.println("Invalid option. Please choose again.");
+
         }
 
         try {

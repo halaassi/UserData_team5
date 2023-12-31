@@ -16,6 +16,8 @@ import edu.najah.cap.posts.Post;
 import edu.najah.cap.posts.PostService;
 import java.time.Instant;
 import java.util.Scanner;
+import java.util.logging.ErrorManager;
+
 import org.apache.log4j.Logger;
 
 public class Application {
@@ -44,12 +46,15 @@ public class Application {
                     int num = Integer.parseInt(scanner.nextLine());
                     Menu menu = new SwitchMenu();
                     menu.menu(num);
-                    logger.getAllAppenders();
+                    //logger.getAllAppenders();
+                    logger.info("Performed menu option: " + num);
+
+
                }
 
         //TODO Your application ends here. Do not Change the existing code
         Instant end = Instant.now();
-        logger.info("Application Ended: " + end);
+        System.out.println("Application Ended: " + end);
    }
 
 

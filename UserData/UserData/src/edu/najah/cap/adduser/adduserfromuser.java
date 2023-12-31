@@ -17,10 +17,10 @@ public class adduserfromuser implements UsarAddFromUser {
         userDeleted.isUserDeleted(user);
         UserProfile newUser = new UserProfile();
         if (userDeleted.isUserDeleted(user) == true) {
-            logger.info("the user has already is deleted .");}
+            System.out.println("the user has already is deleted .");}
         else {newUser.setUserName(user);
             userService.addUser(newUser);
-            logger.info("the user add .");}
+            System.out.println("the user add .");}
 
         
     }

@@ -1,4 +1,4 @@
-package edu.najah.cap.deletion;
+package edu.najah.cap.display;
 
 import edu.najah.cap.data.Application;
 import edu.najah.cap.exceptions.NotFoundException;

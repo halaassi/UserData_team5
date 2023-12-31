@@ -1,6 +1,10 @@
 package edu.najah.cap.menu;
+import edu.najah.cap.adduser.UsarAddFromUser;
+import edu.najah.cap.adduser.adduserfromuser;
 import edu.najah.cap.deletion.*;
 
+import edu.najah.cap.display.Display;
+import edu.najah.cap.display.displayUser;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
@@ -31,36 +35,28 @@ public class SwitchMenu implements Menu {
 
                 if (num1 == 1)
                 {
-                    UserProfile userToDelete = null;
                     try {
-                        userToDelete = userService.getUser(getLoginUserName());
-                    } catch (NotFoundException e) {
-                        throw new RuntimeException(e);
-                    } catch (SystemBusyException e) {
-                        throw new RuntimeException(e);
-                    } catch (BadRequestException e) {
-                        throw new RuntimeException(e);
+                        UserProfile userToDelete = userService.getUser(getLoginUserName());
+                        String userType = String.valueOf(userToDelete.getUserType());
+                        deletionStrategy = new SoftDelete();
+                        deletionStrategy.delete(userToDelete,userType);
+                    } catch (NotFoundException | SystemBusyException | BadRequestException e) {
+                        logger.error("Error while soft deleting user", e);
                     }
-                    String userType = String.valueOf(userToDelete.getUserType());
-                    deletionStrategy = new SoftDelete();
-                    deletionStrategy.delete(userToDelete,userType);
+
 
                 }
                 else if (num1 == 2)
                 {
-                    UserProfile userToDelete = null;
                     try {
-                        userToDelete = userService.getUser(getLoginUserName());
-                    } catch (NotFoundException e) {
-                        throw new RuntimeException(e);
-                    } catch (SystemBusyException e) {
-                        throw new RuntimeException(e);
-                    } catch (BadRequestException e) {
-                        throw new RuntimeException(e);
+                        UserProfile userToDelete = userService.getUser(getLoginUserName());
+                        String userType = String.valueOf(userToDelete.getUserType());
+                        deletionStrategy = new HardDeleteStrategy();
+                        deletionStrategy.delete(userToDelete, String.valueOf(userType));
                     }
-                    String userType = String.valueOf(userToDelete.getUserType());
-                    deletionStrategy = new HardDeleteStrategy();
-                    deletionStrategy.delete(userToDelete, String.valueOf(userType));
+                    catch (NotFoundException | SystemBusyException | BadRequestException e) {
+                        logger.error("Error while soft deleting user", e);
+                    }
                 }
 
                 break;

@@ -1,4 +1,4 @@
-package edu.najah.cap.deletion;
+package edu.najah.cap.display;
 
 public interface displayUser {
     void displayUserData(String userName);

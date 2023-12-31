@@ -1,10 +1,12 @@
-package edu.najah.cap.deletion;
+package edu.najah.cap.adduser;
+import edu.najah.cap.is_user_drlete.IsUserDeleted;
+import edu.najah.cap.is_user_drlete.UserDeleted;
 import edu.najah.cap.iam.UserService;
 import org.apache.log4j.Logger;
 
 import edu.najah.cap.iam.UserProfile;
 
-public class adduserfromuser implements UsarAddFromUser{
+public class adduserfromuser implements UsarAddFromUser {
     private static final Logger logger = Logger.getLogger(adduserfromuser.class);
     UserService userService = new UserService();
 

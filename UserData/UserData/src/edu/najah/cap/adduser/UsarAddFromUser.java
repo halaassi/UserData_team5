@@ -1,4 +1,4 @@
-package edu.najah.cap.deletion;
+package edu.najah.cap.adduser;
 
 
 public interface UsarAddFromUser {

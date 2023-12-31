@@ -1,8 +1,5 @@
-package edu.najah.cap.deletion;
-
-import edu.najah.cap.data.Application;
+package edu.najah.cap.is_user_drlete;
 import org.apache.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

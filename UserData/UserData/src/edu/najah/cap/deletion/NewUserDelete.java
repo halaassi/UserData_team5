@@ -1,5 +1,4 @@
 package edu.najah.cap.deletion;
-
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;

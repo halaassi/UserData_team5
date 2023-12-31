@@ -1,7 +1,4 @@
 package edu.najah.cap.deletion;
-
-
-import edu.najah.cap.data.Application;
 import edu.najah.cap.iam.UserProfile;
 import org.apache.log4j.Logger;
 

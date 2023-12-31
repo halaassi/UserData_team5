@@ -1,4 +1,8 @@
 package edu.najah.cap.menu;
+import edu.najah.cap.Export.ExportService;
+import edu.najah.cap.Export.ExporterFactory;
+import edu.najah.cap.UserType.GetUserType;
+import edu.najah.cap.UserType.IUserType;
 import edu.najah.cap.adduser.UsarAddFromUser;
 import edu.najah.cap.adduser.adduserfromuser;
 import edu.najah.cap.deletion.*;
@@ -21,9 +25,17 @@ public class SwitchMenu implements Menu {
         IUserService userService = new UserService();
         displayUser displayUser = new Display();
 
+
         switch (index) {
             case 1:
-                //1-Exporting Data
+                ExportService exportService = new ExportService(new ExporterFactory());
+                IUserType userTypeToExport = GetUserType.getUserType(getLoginUserName());
+                System.out.println(userTypeToExport);
+                try {
+                    userTypeToExport.exportUserData(exportService, getLoginUserName());
+                } catch (SystemBusyException | BadRequestException | NotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             case 2:
               //  2-Upload Data
@@ -55,7 +67,7 @@ public class SwitchMenu implements Menu {
                         deletionStrategy.delete(userToDelete, String.valueOf(userType));
                     }
                     catch (NotFoundException | SystemBusyException | BadRequestException e) {
-                        logger.error("Error while soft deleting user", e);
+                        logger.error("Error while hard deleting user", e);
                     }
                 }
 

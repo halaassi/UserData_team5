@@ -1,0 +1,33 @@
+package edu.najah.cap.UserType;
+import edu.najah.cap.exceptions.BadRequestException;
+import edu.najah.cap.exceptions.NotFoundException;
+import edu.najah.cap.exceptions.SystemBusyException;
+import edu.najah.cap.iam.IUserService;
+import edu.najah.cap.iam.UserProfile;
+import edu.najah.cap.iam.UserService;
+import edu.najah.cap.iam.UserType;
+public class GetUserType {
+    public static IUserType getUserType(String userName) {
+        UserProfile userProfile= new UserProfile();
+        IUserService userService = new UserService();
+        try {
+            userProfile=userService.getUser(userName);
+        } catch (SystemBusyException | BadRequestException | NotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        UserType userType = userProfile.getUserType();
+
+
+        switch (userType) {
+            case NEW_USER:
+                return new NewIUser();
+            case REGULAR_USER:
+                return new RegularIUser();
+            case PREMIUM_USER:
+                return new PremiumIUser();
+            default:
+                throw new IllegalArgumentException("Invalid user type");
+        }
+    }
+
+}

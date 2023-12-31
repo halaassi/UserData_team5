@@ -26,7 +26,7 @@ public class Application {
     private static final IPostService postService = new PostService();
     private static String loginUserName;
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         generateRandomData();
         Instant start = Instant.now();
         System.out.println("Application Started: " + start);
@@ -36,22 +36,27 @@ public class Application {
         String userName = scanner.nextLine();
         setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
-        MenuOption menuOption;
-        menuOption= new MenuOption();
-        for ( int i =0 ; i < 6 ; i++)
-                {
-                    menuOption.diplay();
-                    int num = Integer.parseInt(scanner.nextLine());
-                    Menu menu = new SwitchMenu();
-                    menu.menu(num);
-                    logger.getAllAppenders();
-               }
+        int userIndex = Integer.parseInt(userName.replaceAll("[^0-9]", ""));
+        if (userIndex > 99) {
+            System.out.println("User is greater than 99 .");
 
-        //TODO Your application ends here. Do not Change the existing code
-        Instant end = Instant.now();
-        logger.info("Application Ended: " + end);
-   }
+        } else {
+            MenuOption menuOption;
+            menuOption = new MenuOption();
+            for (int i = 0; i < 6; i++) {
+                menuOption.diplay();
+                int num = Integer.parseInt(scanner.nextLine());
+                Menu menu = new SwitchMenu();
+                menu.menu(num);
+                logger.info("Performed menu option: " + num);
 
+//                logger.getAllAppenders();
+            }
+            //TODO Your application ends here. Do not Change the existing code
+            Instant end = Instant.now();
+            logger.info("Application Ended: " + end);
+        }
+    }
 
     private static void generateRandomData() {
         Util.setSkipValidation(true);

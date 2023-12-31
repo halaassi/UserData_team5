@@ -16,7 +16,8 @@ import edu.najah.cap.payment.Transaction;
 import edu.najah.cap.posts.IPostService;
 import edu.najah.cap.posts.Post;
 import edu.najah.cap.posts.PostService;
-
+import edu.najah.cap.Upload.GoogleDriveUpload;
+import edu.najah.cap.Upload.DropboxUpload;
 import java.time.Instant;
 import java.util.Scanner;
 
@@ -40,6 +41,8 @@ public class Application {
         String userName = scanner.nextLine();
         setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
+
+
 
 
 
@@ -77,7 +80,7 @@ public class Application {
                     paymentService.pay(new Transaction("user" + i, i * j, "description" + i + "." + j));
                 }
             } catch (Exception e) {
-                System.err.println("Error while generating post for user" + i);
+                System.err.println("Error while generating payment for user" + i);
             }
         }
     }

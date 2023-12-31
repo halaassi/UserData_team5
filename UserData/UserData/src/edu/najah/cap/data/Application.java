@@ -1,48 +1,32 @@
 package edu.najah.cap.data;
-
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.activity.UserActivityService;
-
-import edu.najah.cap.deletion.IsUserDeleted;
-import edu.najah.cap.deletion.UserDeleted;
-import edu.najah.cap.exceptions.BadRequestException;
-import edu.najah.cap.exceptions.NotFoundException;
-import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.exceptions.Util;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.iam.UserService;
 import edu.najah.cap.iam.UserType;
-import edu.najah.cap.menu.MenuOption;
-import edu.najah.cap.menu.SwitchMenu;
-import edu.najah.cap.menu.Menu;
+import edu.najah.cap.menu.*;
 import edu.najah.cap.payment.IPayment;
 import edu.najah.cap.payment.PaymentService;
 import edu.najah.cap.payment.Transaction;
 import edu.najah.cap.posts.IPostService;
 import edu.najah.cap.posts.Post;
 import edu.najah.cap.posts.PostService;
-import java.time.Duration;
 import java.time.Instant;
 import java.util.Scanner;
 import org.apache.log4j.Logger;
 
-
-
 public class Application {
     private static final Logger logger = Logger.getLogger(Application.class);
-
     private static final IUserActivityService userActivityService = new UserActivityService();
     private static final IPayment paymentService = new PaymentService();
     private static final IUserService userService = new UserService();
     private static final IPostService postService = new PostService();
-
     private static String loginUserName;
 
-    public static void main(String[] args) throws SystemBusyException, NotFoundException, BadRequestException {
-
-
+    public static void main(String[] args)  {
         generateRandomData();
         Instant start = Instant.now();
         System.out.println("Application Started: " + start);
@@ -64,12 +48,8 @@ public class Application {
                }
 
         //TODO Your application ends here. Do not Change the existing code
-
         Instant end = Instant.now();
         logger.info("Application Ended: " + end);
-        Duration duration = Duration.between(start, end);
-        logger.info("Execution Time: " + duration.toMillis() + " seconds");
-
    }
 
 
@@ -98,7 +78,6 @@ public class Application {
         }
     }
 
-
     private static void generatePayment(int i) {
         for (int j = 0; j < 100; j++) {
             try {
@@ -110,7 +89,6 @@ public class Application {
             }
         }
     }
-
 
     private static void generatePost(int i) {
         for (int j = 0; j < 100; j++) {
@@ -138,8 +116,8 @@ public class Application {
         userService.addUser(user);
     }
 
-    public static UserType getRandomUserType(int i) {
-        if (i > 0 && i <= 3) {
+    private static UserType getRandomUserType(int i) {
+        if (i > 0 && i < 3) {
             return UserType.NEW_USER;
         } else if (i > 3 && i < 7) {
             return UserType.REGULAR_USER;

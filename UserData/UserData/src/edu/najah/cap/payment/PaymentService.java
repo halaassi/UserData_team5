@@ -33,7 +33,7 @@ public class PaymentService implements IPayment {
         }
         Util.validateUserName(userName);
         if (!transactionMap.containsKey(userName)) {
-            throw new NotFoundException("removeTransaction :-User does not exist");
+            throw new NotFoundException("User does not exist");
         }
         Iterator<Transaction> iterator = transactionMap.get(userName).iterator();
         while (iterator.hasNext()) {

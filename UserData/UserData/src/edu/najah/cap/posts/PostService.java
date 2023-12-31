@@ -33,7 +33,7 @@ public class PostService implements IPostService {
         }
         Util.validateUserName(author);
         if (!posts.containsKey(author)) {
-            throw new NotFoundException("deletePost :-User does not exist");
+            throw new NotFoundException("User does not exist");
         }
         List<Post> authorPosts = posts.get(author);
         if (authorPosts != null) {

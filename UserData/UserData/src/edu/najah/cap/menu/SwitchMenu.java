@@ -1,21 +1,21 @@
 package edu.najah.cap.menu;
 import edu.najah.cap.deletion.*;
-import edu.najah.cap.exceptions.*;
+
+import edu.najah.cap.exceptions.BadRequestException;
+import edu.najah.cap.exceptions.NotFoundException;
+import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.*;
 import org.apache.log4j.Logger;
 import java.util.Scanner;
 import static edu.najah.cap.data.Application.getLoginUserName;
-import static edu.najah.cap.deletion.GetUserType.getUserType;
 
 public class SwitchMenu implements Menu {
     private static final Logger logger = Logger.getLogger(SwitchMenu.class);
     @Override
-    public void menu(int index) throws SystemBusyException, NotFoundException, BadRequestException {
+    public void menu(int index)  {
         Scanner scanner = new Scanner(System.in);
         IUserService userService = new UserService();
         displayUser displayUser = new Display();
-        UserType userType = getUserType(getLoginUserName());
-
 
         switch (index) {
             case 1:
@@ -31,14 +31,34 @@ public class SwitchMenu implements Menu {
 
                 if (num1 == 1)
                 {
-                    UserProfile userToDelete = userService.getUser(getLoginUserName());
+                    UserProfile userToDelete = null;
+                    try {
+                        userToDelete = userService.getUser(getLoginUserName());
+                    } catch (NotFoundException e) {
+                        throw new RuntimeException(e);
+                    } catch (SystemBusyException e) {
+                        throw new RuntimeException(e);
+                    } catch (BadRequestException e) {
+                        throw new RuntimeException(e);
+                    }
+                    String userType = String.valueOf(userToDelete.getUserType());
                     deletionStrategy = new SoftDelete();
-                    deletionStrategy.delete(userToDelete, String.valueOf(userType));
+                    deletionStrategy.delete(userToDelete,userType);
 
                 }
                 else if (num1 == 2)
                 {
-                    UserProfile userToDelete = userService.getUser(getLoginUserName());
+                    UserProfile userToDelete = null;
+                    try {
+                        userToDelete = userService.getUser(getLoginUserName());
+                    } catch (NotFoundException e) {
+                        throw new RuntimeException(e);
+                    } catch (SystemBusyException e) {
+                        throw new RuntimeException(e);
+                    } catch (BadRequestException e) {
+                        throw new RuntimeException(e);
+                    }
+                    String userType = String.valueOf(userToDelete.getUserType());
                     deletionStrategy = new HardDeleteStrategy();
                     deletionStrategy.delete(userToDelete, String.valueOf(userType));
                 }

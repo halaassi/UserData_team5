@@ -5,5 +5,5 @@ import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 
 public interface Menu {
-     void menu(int index) throws SystemBusyException, NotFoundException, BadRequestException;
+     void menu(int index) ;
 }

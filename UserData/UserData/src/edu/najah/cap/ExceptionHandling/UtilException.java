@@ -1,7 +1,5 @@
 package edu.najah.cap.ExceptionHandling;
 
-import java.time.Instant;
-
 
 public class UtilException {
     private UtilException(){}

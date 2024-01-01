@@ -46,8 +46,10 @@ public class Application {
                     int num = Integer.parseInt(scanner.nextLine());
                     Menu menu = new SwitchMenu();
                     menu.menu(num);
-                    //logger.getAllAppenders();
+
                     logger.info("Performed menu option: " + num);
+                    logger.getAllAppenders();
+
 
 
                }

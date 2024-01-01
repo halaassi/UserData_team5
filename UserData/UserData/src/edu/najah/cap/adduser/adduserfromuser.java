@@ -13,7 +13,7 @@ public class adduserfromuser implements UsarAddFromUser {
     @Override
     public void add(String user) {
         IsUserDeleted userDeleted;
-        userDeleted = new UserDeleted();
+       userDeleted = new UserDeleted();
         userDeleted.isUserDeleted(user);
         UserProfile newUser = new UserProfile();
         if (userDeleted.isUserDeleted(user) == true) {

@@ -16,7 +16,7 @@ public class FileWriterUsername {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("deleted_usernames.txt"))) {
             writer.write(username + System.lineSeparator());
         } catch (IOException e) {
-            logger.info("Error saving username to file: " + e.getMessage());
+            logger.error("Error saving username to file: " + e.getMessage());
         }
 
 }

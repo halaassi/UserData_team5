@@ -1,10 +1,7 @@
 package edu.najah.cap.ExceptionHandling;
 
-import edu.najah.cap.exceptions.BadRequestException;
-
-
 public class validateuser extends RuntimeException{
-    public  validateuser(String message)throws  BadRequestException  {
+    public  validateuser(String message) {
         super(message);
     }
 }

@@ -1,5 +1,5 @@
 package edu.najah.cap.data;
-import edu.najah.cap.ExceptionHandling.UtilException;
+import edu.najah.cap.ExceptionHandling.*;
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.activity.UserActivityService;
@@ -19,7 +19,7 @@ import edu.najah.cap.posts.Post;
 import edu.najah.cap.posts.PostService;
 import java.time.Instant;
 import java.util.Scanner;
-import java.util.logging.ErrorManager;
+
 
 import org.apache.log4j.Logger;
 
@@ -46,24 +46,31 @@ public class Application {
 
         try {
             Util.validateUserName(getLoginUserName());
-            UtilException.validateName(getLoginUserName());
-            MenuOption menuOption;
-            menuOption= new MenuOption();
-            for ( int i =0 ; i < 6 ; i++) {
-                menuOption.diplay();
-                int num = Integer.parseInt(scanner.nextLine());
-                Menu menu = new SwitchMenu();
-                menu.menu(num);
-                logger.info("Performed menu option: " + num);
-                logger.info("Performed menu option: " + num);
-                logger.getAllAppenders();
+            try {
+                UtilException.validateName(getLoginUserName());
+                MenuOption menuOption;
+                menuOption = new MenuOption();
+                for (int i = 0; i < 6; i++) {
+                    menuOption.diplay();
+                    int num = Integer.parseInt(scanner.nextLine());
+                    Menu menu = new SwitchMenu();
+                    menu.menu(num);
+                    logger.info("Performed menu option: " + num);
+                    logger.info("Performed menu option: " + num);
+                    logger.getAllAppenders();
 
 
-            }
+                }
+
+
             try {
                 Thread.sleep(1000); // 1000 milliseconds (1 second) delay
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 throw new RuntimeException(e);
+            }
+            } catch (validateuser e) {
+                throw new validateuser("Validation failed: " + e.getMessage());
             }
         } catch (SystemBusyException|BadRequestException e) {
         throw new RuntimeException(e);

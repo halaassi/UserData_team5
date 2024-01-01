@@ -32,6 +32,8 @@ public class SwitchMenu implements Menu {
                 System.out.println(userTypeToExport);
                 try {
                     userTypeToExport.exportUserData(exportService, getLoginUserName());
+                    logger.info("Exoprting data completed for user : "+getLoginUserName());
+
                 } catch (SystemBusyException | BadRequestException | NotFoundException e) {
                     throw new RuntimeException(e);
                 }

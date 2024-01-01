@@ -25,8 +25,6 @@ import org.apache.log4j.Logger;
 
 public class Application {
     public static final Logger logger = Logger.getLogger(Application.class);
-
-    //private static final Logger logger = Logger.getLogger(Application.class);
     private static final IUserActivityService userActivityService = new UserActivityService();
     private static final IPayment paymentService = new PaymentService();
     private static final IUserService userService = new UserService();
@@ -58,11 +56,7 @@ public class Application {
                     logger.info("Performed menu option: " + num);
                     logger.info("Performed menu option: " + num);
                     logger.getAllAppenders();
-
-
                 }
-
-
             try {
                 Thread.sleep(1000); // 1000 milliseconds (1 second) delay
             }

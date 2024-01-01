@@ -1,4 +1,4 @@
-package edu.najah.cap.is_user_drlete;
+package edu.najah.cap.IsUserDelete;
 import org.apache.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.FileReader;

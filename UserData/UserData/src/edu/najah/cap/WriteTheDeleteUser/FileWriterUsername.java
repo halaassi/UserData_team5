@@ -1,4 +1,4 @@
-package edu.najah.cap.write_the_delet_user;
+package edu.najah.cap.WriteTheDeleteUser;
 import org.apache.log4j.Logger;
 import java.io.BufferedWriter;
 import java.io.FileWriter;

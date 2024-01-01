@@ -1,6 +1,6 @@
 package edu.najah.cap.deletion;
 import edu.najah.cap.iam.UserProfile;
-import edu.najah.cap.write_the_delet_user.FileWriterUsername;
+import edu.najah.cap.WriteTheDeleteUser.FileWriterUsername;
 import org.apache.log4j.Logger;
 
 public class HardDeleteStrategy implements DeletionStrategy

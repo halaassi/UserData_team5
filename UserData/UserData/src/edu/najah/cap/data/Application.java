@@ -42,8 +42,6 @@ public class Application {
         setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
 
-        try {
-            Util.validateUserName(getLoginUserName());
             try {
                 UtilException.validateName(getLoginUserName());
                 MenuOption menuOption;
@@ -66,10 +64,9 @@ public class Application {
             } catch (validateuser e) {
                 throw new validateuser("Validation failed: " + e.getMessage());
             }
-        } catch (SystemBusyException|BadRequestException e) {
-        throw new RuntimeException(e);
 
-        }
+
+        
 
 
         //TODO Your application ends here. Do not Change the existing code

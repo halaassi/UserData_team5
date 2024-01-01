@@ -23,6 +23,7 @@ public class SwitchMenu implements Menu {
         UserProfile userProfile = new UserProfile();
         displayUser displayUser = new Display();
         UserType userType = userProfile.getUserType();
+        int retryCount = 0;
 
 
         switch (index) {
@@ -38,6 +39,9 @@ public class SwitchMenu implements Menu {
                     throw new RuntimeException(e);
                 }
                 break;
+
+
+
             case 2:
                 //  2-Upload Data
                 break;
@@ -47,7 +51,7 @@ public class SwitchMenu implements Menu {
                 DeletionStrategy deletionStrategy;
 
 
-                int retryCount = 0;
+
 
                 while (retryCount < MAX_RETRIES) {
 

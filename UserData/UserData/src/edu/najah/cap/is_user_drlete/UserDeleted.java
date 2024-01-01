@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class UserDeleted implements IsUserDeleted {
-    private static final Logger logger = Logger.getLogger(UserDeleted.class);
+    private final Logger logger = Logger.getLogger(getClass());
 
     public boolean isUserDeleted(String userName) {
 

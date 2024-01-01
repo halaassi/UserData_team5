@@ -3,8 +3,7 @@ import edu.najah.cap.iam.UserProfile;
 import org.apache.log4j.Logger;
 
 public class SoftDelete implements DeletionStrategy {
-    private static final Logger logger = Logger.getLogger(SoftDelete.class);
-
+    private final Logger logger = Logger.getLogger(getClass());
     @Override
     public void delete(UserProfile user,String userType) {
         try {

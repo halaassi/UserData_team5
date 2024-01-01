@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 
 public class HardDeleteStrategy implements DeletionStrategy
 {
-    private static final Logger logger = Logger.getLogger(HardDeleteStrategy.class);
+    private final Logger logger = Logger.getLogger(getClass());
     @Override
     public void delete(UserProfile user, String userType)
     {

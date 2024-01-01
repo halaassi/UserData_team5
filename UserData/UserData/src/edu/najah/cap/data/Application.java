@@ -1,7 +1,10 @@
 package edu.najah.cap.data;
+import edu.najah.cap.ExceptionHandling.UtilException;
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.activity.UserActivityService;
+import edu.najah.cap.exceptions.BadRequestException;
+import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.exceptions.Util;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
@@ -21,14 +24,16 @@ import java.util.logging.ErrorManager;
 import org.apache.log4j.Logger;
 
 public class Application {
-    private static final Logger logger = Logger.getLogger(Application.class);
+    public static final Logger logger = Logger.getLogger(Application.class);
+
+    //private static final Logger logger = Logger.getLogger(Application.class);
     private static final IUserActivityService userActivityService = new UserActivityService();
     private static final IPayment paymentService = new PaymentService();
     private static final IUserService userService = new UserService();
     private static final IPostService postService = new PostService();
     private static String loginUserName;
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         generateRandomData();
         Instant start = Instant.now();
         System.out.println("Application Started: " + start);
@@ -38,26 +43,38 @@ public class Application {
         String userName = scanner.nextLine();
         setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
-        MenuOption menuOption;
-        menuOption= new MenuOption();
-        for ( int i =0 ; i < 6 ; i++)
-                {
-                    menuOption.diplay();
-                    int num = Integer.parseInt(scanner.nextLine());
-                    Menu menu = new SwitchMenu();
-                    menu.menu(num);
 
-                    logger.info("Performed menu option: " + num);
-                    logger.getAllAppenders();
+        try {
+            Util.validateUserName(getLoginUserName());
+            UtilException.validateName(getLoginUserName());
+            MenuOption menuOption;
+            menuOption= new MenuOption();
+            for ( int i =0 ; i < 6 ; i++) {
+                menuOption.diplay();
+                int num = Integer.parseInt(scanner.nextLine());
+                Menu menu = new SwitchMenu();
+                menu.menu(num);
+                logger.info("Performed menu option: " + num);
+                logger.info("Performed menu option: " + num);
+                logger.getAllAppenders();
 
 
+            }
+            try {
+                Thread.sleep(1000); // 1000 milliseconds (1 second) delay
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (SystemBusyException|BadRequestException e) {
+        throw new RuntimeException(e);
 
-               }
+        }
+
 
         //TODO Your application ends here. Do not Change the existing code
-        Instant end = Instant.now();
-        System.out.println("Application Ended: " + end);
-   }
+                Instant end = Instant.now();
+                System.out.println("Application Ended: " + end);
+            }
 
 
     private static void generateRandomData() {

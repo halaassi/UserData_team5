@@ -9,7 +9,10 @@ The "UserData" project efficiently manages user data with core features includin
 ### External Libraries
 
 - **Logger Library:**
-  - Enhances system logging capabilities for comprehensive event and error tracking.
+  -we use  logger to record every action in system
+   -'logger.info()' log an informational message in system
+   -'logger.error()' log an error message
+  -'logger.getAllAppenders()' retrieve all the appenders associated with the logger
   - [Download Log4j](https://www.apache.org/dyn/closer.cgi/logging/log4j/1.2.17/log4j-1.2.17.zip)
 
 - **PDF Library:**

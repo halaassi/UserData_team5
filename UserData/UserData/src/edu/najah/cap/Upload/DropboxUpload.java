@@ -1,5 +1,7 @@
 package edu.najah.cap.Upload;
 
+import edu.najah.cap.IsUserDelete.IsUserDeleted;
+import edu.najah.cap.IsUserDelete.UserDeleted;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
@@ -19,14 +21,15 @@ public class DropboxUpload implements Upload {
     ConvertAccordingToUser converter = new ConvertAccordingToUser();
 
 
-
     @Override
     public void uploadFile(String userId) throws SystemBusyException, BadRequestException, NotFoundException {
+
+
         try {
             UserProfile user;
-            user=userService.getUser(userId);
+            user = userService.getUser(userId);
             List<ByteArrayOutputStream> pdfByteArrays;
-            pdfByteArrays= converter.convertAccordingToUser(user.getUserType(),userId);
+            pdfByteArrays = converter.convertAccordingToUser(user.getUserType(), userId);
 
             String folderPath = "Dropbox/";
             String zipFilePath = folderPath + userId + "_ZipFile.zip";
@@ -45,6 +48,7 @@ public class DropboxUpload implements Upload {
         } catch (Exception e) {
             logger.error("Error during file upload", e);
         }
+
 
     }
 }

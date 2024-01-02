@@ -1,5 +1,7 @@
 package edu.najah.cap.menu;
 
+import edu.najah.cap.IsUserDelete.IsUserDeleted;
+import edu.najah.cap.IsUserDelete.UserDeleted;
 import edu.najah.cap.Upload.DropboxUpload;
 import edu.najah.cap.Upload.GoogleDriveUpload;
 import edu.najah.cap.Upload.Upload;
@@ -20,7 +22,10 @@ public class SwitchMenu implements Menu {
     private static final int MAX_RETRIES = 5;
 
     private static final long RETRY_DELAY = 500;
-    int retryCount = 0;
+
+    IsUserDeleted isUserDeleted =new UserDeleted();
+
+
 
 
     @Override
@@ -41,7 +46,7 @@ public class SwitchMenu implements Menu {
                 System.out.println(userTypeToExport);
                 try {
                     userTypeToExport.exportUserData(exportService, getLoginUserName());
-                    logger.info("Exoprting data completed for user : "+getLoginUserName());
+                    logger.info("Exporting data completed for user : "+getLoginUserName());
 
                 } catch (SystemBusyException | BadRequestException | NotFoundException e) {
                     throw new RuntimeException(e);
@@ -54,43 +59,47 @@ public class SwitchMenu implements Menu {
             case 2:
 
                 Upload upload;
-                logger.info("if you want to upload to Google Drive Click 1 and if you want to upload to Dropbox Click 2");
-                int choice = scanner.nextInt();
-
-                while (retryCount < MAX_RETRIES) {
-                    try {
-
-                        if (choice == 1) {
-
-                            upload = new GoogleDriveUpload();
-                            upload.uploadFile(getLoginUserName());
-
-                        } else if (choice == 2) {
-
-                            upload = new DropboxUpload();
-                            upload.uploadFile(getLoginUserName());
-
-
-                        } else {
-                            logger.info("The selected choice is wrong");
-                        }
-                        break;
-
-                    } catch (Exception e) {
-                        logger.error("Error while hard uploading data. Retrying...");
-                        retryCount++;
+                if(!isUserDeleted.isUserDeleted(getLoginUserName())) {
+                    logger.info("If you want to upload to Google Drive Click 1 and if you want to upload to Dropbox Click 2");
+                    int choice = scanner.nextInt();
+                    while (retryCount < MAX_RETRIES) {
                         try {
-                            Thread.sleep(RETRY_DELAY);
-                        } catch (InterruptedException ex) {
-                            Thread.currentThread().interrupt();
+
+                            if (choice == 1) {
+
+                                upload = new GoogleDriveUpload();
+                                upload.uploadFile(getLoginUserName());
+
+                            } else if (choice == 2) {
+
+                                upload = new DropboxUpload();
+                                upload.uploadFile(getLoginUserName());
+
+
+                            } else {
+                                logger.info("The selected choice is wrong");
+                            }
+                            break;
+
+                        } catch (Exception e) {
+                            logger.error("Error while hard uploading data. Retrying...");
+                            retryCount++;
+                            try {
+                                Thread.sleep(RETRY_DELAY);
+                            } catch (InterruptedException ex) {
+                                Thread.currentThread().interrupt();
+                            }
                         }
                     }
                 }
-                retryCount =0;
+                else{
+                    logger.info("This user Is Deleted");
+                }
+
 
                 break;
             case 3:
-                System.out.println("if you need to Soft delete Click 1 and if you need to hard delete Click 2 ");
+                System.out.println("If you want to Soft delete Click 1 and if you want to hard delete Click 2 ");
                 double num1 = Double.parseDouble(scanner.nextLine());
                 DeletionStrategy deletionStrategy;
 
@@ -124,14 +133,14 @@ public class SwitchMenu implements Menu {
                 displayUser.displayUserData(getLoginUserName());
                 break;
             case 5:
-                System.out.println("add user name ");
+                System.out.println("Add user name ");
                 String userName = scanner.nextLine();
                 UsarAddFromUser adduser;
                 adduser = new adduserfromuser();
                 adduser.add(userName);
                 break;
             case 6:
-                System.out.println("exit the program. Goodbye!");
+                System.out.println("Exit the program. Goodbye! Happy New Year :)");
                 System.exit(0);
                 break;
             default:

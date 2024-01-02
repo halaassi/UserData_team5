@@ -22,7 +22,7 @@ public class GetUserType {
                     throw new RuntimeException("Error getting user type for user: " + userName, e);
                 }
                try {
-                    Thread.sleep(1000 * (i + 1)); // Wait time increases with each retry
+                    Thread.sleep(1000 * (i + 1));
                 } catch (InterruptedException ie) {
                     Thread.currentThread().interrupt();
                 }

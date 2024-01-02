@@ -23,43 +23,35 @@ public class ConvertToPDF {
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
             try (contentStream) {
                 contentStream.beginText();
-                contentStream.newLineAtOffset(20, 700);
                 contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 12);
 
-                String userProfileString = String.format(
-                        "User Name: %s" +
-                                "Full Name: %s %s" +
-                                "Email: %s" +
-                                "Phone Number: %s" +
-                                "Role: %s" +
-                                "Department: %s" +
-                                "Organization: %s" +
-                                "Country: %s" +
-                                "City: %s" +
-                                "Street: %s" +
-                                "Postal Code: %s" +
-                                "Building: %s" +
-                                "User Type: %s",
-                        userProfile.getUserName(),
-                        userProfile.getFirstName(),
-                        userProfile.getLastName(),
-                        userProfile.getEmail(),
-                        userProfile.getPhoneNumber(),
-                        userProfile.getRole(),
-                        userProfile.getDepartment(),
-                        userProfile.getOrganization(),
-                        userProfile.getCountry(),
-                        userProfile.getCity(),
-                        userProfile.getStreet(),
-                        userProfile.getPostalCode(),
-                        userProfile.getBuilding(),
-                        userProfile.getUserType()
-                );
+                float yStart = 700;
+                float lineHeight = 14;
 
-                contentStream.showText(userProfileString);
+                contentStream.newLineAtOffset(20, yStart);
 
+                String[] userInformation = {
+                        "User Name: " + userProfile.getUserName(),
+                        "Full Name: " + userProfile.getFirstName() + " " + userProfile.getLastName(),
+                        "Email: " + userProfile.getEmail(),
+                        "Phone Number: " + userProfile.getPhoneNumber(),
+                        "Role: " + userProfile.getRole(),
+                        "Department: " + userProfile.getDepartment(),
+                        "Organization: " + userProfile.getOrganization(),
+                        "Country: " + userProfile.getCountry(),
+                        "City: " + userProfile.getCity(),
+                        "Street: " + userProfile.getStreet(),
+                        "Postal Code: " + userProfile.getPostalCode(),
+                        "Building: " + userProfile.getBuilding(),
+                        "User Type: " + userProfile.getUserType()
+                };
 
-            }catch (Exception e) {
+                for (String line : userInformation) {
+                    contentStream.showText(line);
+                    contentStream.newLineAtOffset(0, -lineHeight);
+                }
+
+            } catch (Exception e) {
                 e.printStackTrace();
                 System.err.println("Exception message: " + e.getMessage());
                 throw e;
@@ -67,13 +59,14 @@ public class ConvertToPDF {
                 contentStream.endText();
             }
 
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             document.save(outputStream);
 
             return outputStream;
         }
     }
+
+
 
 
 

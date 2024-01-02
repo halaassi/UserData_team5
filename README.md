@@ -28,7 +28,7 @@ The "UserData" project efficiently manages user data with core features includin
   - used in the upload file to mange which data have to be upload according to user type.
 
 - **Export:**
-  - 
+  - used to create exporters based on the type of services and create IUserType instances based on the user type
 
 - **Delete:**
   - in HardDeleteStrategy where the appropriate delete method is called by the userType where it implements a OCP (open-closed principle) 
@@ -36,7 +36,7 @@ The "UserData" project efficiently manages user data with core features includin
 #### Template Pattern:
 
 - **Export:**
-  - 
+  - used to defining exportUserData as a template in IUserType, allowing concrete subclasses to customize exported data types within the fixed export process. 
 
 #### Strategy Pattern:
 
@@ -44,7 +44,7 @@ The "UserData" project efficiently manages user data with core features includin
   - used in the upload to make the user select where he want to upload (google drive, or dropbox).
 
 - **Export:**
-  - 
+  - used in the UserType interface establishes a shared set of actions for different user categories, such as NewIUser, RegularIUser, and PremiumIUser. 
 
 - **Delete:**
   - in DeletionStrategy, where one of the deletion types (DeleteUserHardType or SoftDelete) is chosen at runtime without modifying the client code.

@@ -14,6 +14,7 @@ The "UserData" project efficiently manages user data with core features includin
 
 - **PDF Library:**
   - Facilitates seamless PDF generation, used in export and upload functionalities.
+  - We used it in the export and the upload for creating pdf files that have all user information.
   - [Download PDFBox](https://www.apache.org/dyn/closer.lua/pdfbox/3.0.1/pdfbox-app-3.0.1.jar)
 
 ### Design Patterns

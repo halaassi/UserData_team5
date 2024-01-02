@@ -25,7 +25,7 @@ The "UserData" project efficiently manages user data with core features includin
 #### Factory Pattern:
 
 - **Upload:**
-  - used in the upload file to mange which data have to be upload according to user type.
+  - used in the upload/ create a zip file to manage which data have to be upload according to user type.
 
 - **Export:**
   - used to create exporters based on the type of services and create IUserType instances based on the user type

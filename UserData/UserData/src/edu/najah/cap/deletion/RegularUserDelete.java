@@ -10,7 +10,7 @@ import edu.najah.cap.iam.*;
 public class RegularUserDelete implements DeleteUserHardType{
 
     @Override
-    public void deleteuser(UserProfile user) {
+    public void deleteUser(UserProfile user) {
         UserActivityService userActivityService = new UserActivityService();
         UserService userService = new UserService();
         PostService postService = new PostService();

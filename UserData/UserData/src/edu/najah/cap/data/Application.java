@@ -40,38 +40,41 @@ public class Application {
         setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
 
-            try {
-                UtilException.validateName(getLoginUserName());
-                MenuOption menuOption;
-                menuOption = new MenuOption();
-                for (int i = 0; i < 6; i++) {
-                    menuOption.display();
-                    int num = Integer.parseInt(scanner.nextLine());
-                    Menu menu = new SwitchMenu();
-                    menu.menu(num);
-                    logger.info("Performed menu option: " + num);
-                    logger.getAllAppenders();
-                }
+        try {
+            UtilException.validateName(getLoginUserName());
+            MenuOption menuOption;
+            menuOption = new MenuOption();
+            boolean menuStatus = true;
+
+
+            while (menuStatus) {
+                menuOption.display();
+                int choice = Integer.parseInt(scanner.nextLine());
+                Menu menu = new SwitchMenu();
+                menuStatus=menu.menu(choice);
+                logger.info("Performed menu option: " + choice);
+                logger.getAllAppenders();
+            }
             try {
                 Thread.sleep(1000);
             }
             catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+
             } catch (ValidateUser e) {
                 throw new ValidateUser("Validation failed: " + e.getMessage());
             }
 
 
-        
 
 
 
 
         //TODO Your application ends here. Do not Change the existing code
-                Instant end = Instant.now();
-                System.out.println("Application Ended: " + end);
-            }
+        Instant end = Instant.now();
+        System.out.println("Application Ended: " + end);
+    }
 
 
     private static void generateRandomData() {

@@ -7,7 +7,7 @@ import edu.najah.cap.posts.PostService;
 public class NewUserDelete implements DeleteUserHardType {
 
     @Override
-    public void deleteuser(UserProfile user) {
+    public void deleteUser(UserProfile user) {
         UserService userService = new UserService();
         PostService postService = new PostService();
         try {

@@ -29,7 +29,7 @@ public class SwitchMenu implements Menu {
 
 
     @Override
-    public void menu(int index) {
+    public boolean menu(int index) {
         Scanner scanner = new Scanner(System.in);
         IUserService userService = new UserService();
         UserProfile userProfile = new UserProfile();
@@ -52,7 +52,7 @@ public class SwitchMenu implements Menu {
                     throw new RuntimeException(e);
                 }
 
-                break;
+                return true;
 
 
 
@@ -79,7 +79,7 @@ public class SwitchMenu implements Menu {
                             } else {
                                 logger.info("The selected choice is wrong");
                             }
-                            break;
+                            return true;
 
                         } catch (Exception e) {
                             logger.error("Error while hard uploading data. Retrying...");
@@ -89,6 +89,7 @@ public class SwitchMenu implements Menu {
                             } catch (InterruptedException ex) {
                                 Thread.currentThread().interrupt();
                             }
+
                         }
                     }
                 }
@@ -97,8 +98,9 @@ public class SwitchMenu implements Menu {
                 }
 
 
-                break;
+                return true;
             case 3:
+
                 System.out.println("If you want to Soft delete Click 1 and if you want to hard delete Click 2 ");
                 double num1 = Double.parseDouble(scanner.nextLine());
                 DeletionStrategy deletionStrategy;
@@ -117,7 +119,10 @@ public class SwitchMenu implements Menu {
                             deletionStrategy = new HardDeleteStrategy();
                             deletionStrategy.delete(userToDelete, String.valueOf(userType));
                         }
-                        break;
+                        else{
+                            logger.error("The selected choice is wrong");
+                        }
+                        return true;
                     } catch (Exception e) {
                         logger.error("Error while hard deleting user. Retrying...");
                         retryCount++;
@@ -128,23 +133,27 @@ public class SwitchMenu implements Menu {
                         }
                     }
                 }
-                break;
+                return true;
             case 4:
                 displayUser.displayUserData(getLoginUserName());
-                break;
+                return true;
             case 5:
                 System.out.println("Add user name ");
                 String userName = scanner.nextLine();
                 UsarAddFromUser adduser;
-                adduser = new adduserfromuser();
+                adduser = new AddUserfromUser();
                 adduser.add(userName);
-                break;
+                return true;
             case 6:
                 System.out.println("Exit the program. Goodbye! Happy New Year :)");
+
                 System.exit(0);
-                break;
+
+
+                return false;
             default:
                 System.out.println("Invalid option. Please choose again.");
         }
+        return true;
     }
 }

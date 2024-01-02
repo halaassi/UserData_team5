@@ -1,6 +1,4 @@
 package edu.najah.cap.ExceptionHandling;
-
-
 public class UtilException {
     private UtilException(){}
 
@@ -8,7 +6,9 @@ public class UtilException {
     {
         int userIndex = Integer.parseInt(userName.replaceAll("[^0-9]", ""));
         if (userIndex > 99) {
+
             throw new ValidateUser("User Id is greater than 99 .");
+
         }
 
     }}

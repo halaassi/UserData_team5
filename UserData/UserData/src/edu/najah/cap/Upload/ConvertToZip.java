@@ -1,48 +1,42 @@
 package edu.najah.cap.Upload;
-
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class ConvertToZip {
 
-    public static void createZipFile(String sourceFilePath, String zipFilePath) {
-        try {
-            File sourceFile = new File(sourceFilePath);
+    public static void createZipFile(String zipFilePath, List<ByteArrayOutputStream> pdfByteArrays) {
+        try (FileOutputStream fos = new FileOutputStream(zipFilePath);
+             ZipOutputStream zos = new ZipOutputStream(fos)) {
 
-            if (!sourceFile.exists()) {
-                System.err.println("Source file does not exist");
-                return;
+            for (int i = 0; i < pdfByteArrays.size(); i++) {
+                // Add each PDF as an entry in the zip file
+                addByteArrayToZip(pdfByteArrays.get(i), zos, "Document" + (i + 1) + ".pdf");
             }
 
-            FileOutputStream fos = new FileOutputStream(zipFilePath);
-            ZipOutputStream zos = new ZipOutputStream(fos);
-
-            // Add the source file to the zip archive
-            addFileToZip(sourceFile, zos);
-
-            zos.close();
-            fos.close();
             System.out.println("Zip file created: " + zipFilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void addFileToZip(File file, ZipOutputStream zos) throws IOException {
-        FileInputStream fis = new FileInputStream(file);
-        ZipEntry zipEntry = new ZipEntry(file.getName());
-        zos.putNextEntry(zipEntry);
+    private static void addByteArrayToZip(ByteArrayOutputStream byteArray, ZipOutputStream zos, String entryName) throws IOException {
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(byteArray.toByteArray())) {
+            ZipEntry zipEntry = new ZipEntry(entryName);
+            zos.putNextEntry(zipEntry);
 
-        byte[] buffer = new byte[1024];
-        int bytesRead;
+            byte[] buffer = new byte[1024];
+            int bytesRead;
 
-        while ((bytesRead = fis.read(buffer)) > 0) {
-            zos.write(buffer, 0, bytesRead);
+            while ((bytesRead = bis.read(buffer)) > 0) {
+                zos.write(buffer, 0, bytesRead);
+            }
+
+            zos.closeEntry();
         }
-
-        fis.close();
-        zos.closeEntry();
     }
 }
-

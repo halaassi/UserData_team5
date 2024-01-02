@@ -10,6 +10,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,21 +24,21 @@ public class ConvertToPDF {
             try (contentStream) {
                 contentStream.beginText();
                 contentStream.newLineAtOffset(20, 700);
-                contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 12);
+                contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 12);
 
                 String userProfileString = String.format(
-                        "User Name: %s\n" +
-                                "Full Name: %s %s\n" +
-                                "Email: %s\n" +
-                                "Phone Number: %s\n" +
-                                "Role: %s\n" +
-                                "Department: %s\n" +
-                                "Organization: %s\n" +
-                                "Country: %s\n" +
-                                "City: %s\n" +
-                                "Street: %s\n" +
-                                "Postal Code: %s\n" +
-                                "Building: %s\n" +
+                        "User Name: %s" +
+                                "Full Name: %s %s" +
+                                "Email: %s" +
+                                "Phone Number: %s" +
+                                "Role: %s" +
+                                "Department: %s" +
+                                "Organization: %s" +
+                                "Country: %s" +
+                                "City: %s" +
+                                "Street: %s" +
+                                "Postal Code: %s" +
+                                "Building: %s" +
                                 "User Type: %s",
                         userProfile.getUserName(),
                         userProfile.getFirstName(),
@@ -58,10 +59,18 @@ public class ConvertToPDF {
                 contentStream.showText(userProfileString);
 
 
+            }catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Exception message: " + e.getMessage());
+                throw e;
+            } finally {
+                contentStream.endText();
             }
-            contentStream.endText();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             document.save(outputStream);
+
             return outputStream;
         }
     }
@@ -74,15 +83,13 @@ public class ConvertToPDF {
             document.addPage(page);
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
             try (contentStream) {
-                contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 12);
+                contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 12);
                 contentStream.beginText();
                 contentStream.newLineAtOffset(50, 700);
 
                 for (Transaction transaction : transactions) {
                     String transactionString = String.format(
-                            "ID: %s | User: %s | Amount: %s | Timestamp: %s",
-                            transaction.getId(),
-                            transaction.getUserName(),
+                            "Amount: %s | Timestamp: %s",
                             transaction.getAmount(),
                             transaction.getDescription()
                     );
@@ -91,11 +98,17 @@ public class ConvertToPDF {
                     contentStream.newLineAtOffset(0, -20);
                 }
 
-
+            }catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Exception message: " + e.getMessage());
+                throw e;
+            } finally {
+                contentStream.endText();
             }
-            contentStream.endText();
+
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             document.save(outputStream);
+
             return outputStream;
         }
     }
@@ -107,31 +120,36 @@ public class ConvertToPDF {
 
             try (contentStream) {
                 contentStream.beginText();
-                contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 12);
+                contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 12);
                 contentStream.newLineAtOffset(20, 700);
 
                 for (Post post : posts) {
                     String postString = String.format(
-                            "Title: %s\n" +
-                                    "Body: %s\n" +
-                                    "Author: %s\n" +
-                                    "Date: %s\n\n",
+                            "Title: %s | Body: %s | Author: %s | Date: %s",
                             post.getTitle(),
                             post.getBody(),
                             post.getAuthor(),
                             post.getDate()
                     );
                     contentStream.showText(postString);
+                    contentStream.newLineAtOffset(0, -20);
                 }
 
-
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Exception message: " + e.getMessage());
+                throw e;
+            } finally {
+                contentStream.endText();
             }
-            contentStream.endText();
+
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             document.save(outputStream);
+
             return outputStream;
         }
     }
+
     public static ByteArrayOutputStream convertUserActivitiesToPDF(List<UserActivity> userActivities) throws IOException {
         try (PDDocument document = new PDDocument()) {
             PDPage page = new PDPage();
@@ -139,26 +157,30 @@ public class ConvertToPDF {
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
             try (contentStream) {
                 contentStream.beginText();
-                contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 12);
+                contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 12);
                 contentStream.newLineAtOffset(20, 700);
 
                 for (UserActivity activity : userActivities) {
                     String activityString = String.format(
-                            "User ID: %s\n" +
-                                    "Activity Type: %s\n" +
-                                    "Activity Date: %s\n\n",
-                            activity.getUserId(),
+                                    "Activity Type: %s | Activity Date: %s",
                             activity.getActivityType(),
                             activity.getActivityDate()
                     );
                     contentStream.showText(activityString);
+                    contentStream.newLineAtOffset(0, -20);
                 }
 
 
+            }catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Exception message: " + e.getMessage());
+                throw e;
+            } finally {
+                contentStream.endText();
             }
-            contentStream.endText();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             document.save(outputStream);
+
             return outputStream;
         }
     }

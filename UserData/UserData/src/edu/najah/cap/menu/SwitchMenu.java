@@ -1,9 +1,10 @@
 package edu.najah.cap.menu;
-//import edu.najah.cap.Export.*;
-//import edu.najah.cap.UserType.*;
+
 import edu.najah.cap.Upload.DropboxUpload;
 import edu.najah.cap.Upload.GoogleDriveUpload;
 import edu.najah.cap.Upload.Upload;
+import edu.najah.cap.Export.*;
+import edu.najah.cap.UserType.*;
 import edu.najah.cap.adduser.*;
 import edu.najah.cap.deletion.*;
 import edu.najah.cap.display.*;
@@ -15,6 +16,7 @@ import static edu.najah.cap.data.Application.getLoginUserName;
 
 public class SwitchMenu implements Menu {
     private final Logger logger = Logger.getLogger(getClass());
+
     private static final int MAX_RETRIES = 5;
 
     private static final long RETRY_DELAY = 500;
@@ -28,23 +30,27 @@ public class SwitchMenu implements Menu {
         UserProfile userProfile = new UserProfile();
         displayUser displayUser = new Display();
         UserType userType = userProfile.getUserType();
-
-
+        int retryCount = 0;
 
 
         switch (index) {
             case 1:
-//                ExportService exportService = new ExportService(new ExporterFactory());
-//                IUserType userTypeToExport = GetUserType.getUserType(getLoginUserName());
-//                System.out.println(userTypeToExport);
-//                try {
-//                    userTypeToExport.exportUserData(exportService, getLoginUserName());
-//                    logger.info("Exoprting data completed for user : "+getLoginUserName());
-//
-//                } catch (SystemBusyException | BadRequestException | NotFoundException e) {
-//                    throw new RuntimeException(e);
-//                }
+
+                ExportService exportService = new ExportService(new ExporterFactory());
+                IUserType userTypeToExport = GetUserType.getUserType(getLoginUserName());
+                System.out.println(userTypeToExport);
+                try {
+                    userTypeToExport.exportUserData(exportService, getLoginUserName());
+                    logger.info("Exoprting data completed for user : "+getLoginUserName());
+
+                } catch (SystemBusyException | BadRequestException | NotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
                 break;
+
+
+
             case 2:
 
                 Upload upload;
@@ -81,11 +87,13 @@ public class SwitchMenu implements Menu {
                     }
                 }
                 retryCount =0;
+
                 break;
             case 3:
                 System.out.println("if you need to Soft delete Click 1 and if you need to hard delete Click 2 ");
                 double num1 = Double.parseDouble(scanner.nextLine());
                 DeletionStrategy deletionStrategy;
+
 
                 while (retryCount < MAX_RETRIES) {
 
@@ -125,7 +133,6 @@ public class SwitchMenu implements Menu {
             case 6:
                 System.out.println("exit the program. Goodbye!");
                 System.exit(0);
-
                 break;
             default:
                 System.out.println("Invalid option. Please choose again.");

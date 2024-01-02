@@ -14,7 +14,6 @@ public class ConvertToZip {
              ZipOutputStream zos = new ZipOutputStream(fos)) {
 
             for (int i = 0; i < pdfByteArrays.size(); i++) {
-                // Add each PDF as an entry in the zip file
                 addByteArrayToZip(pdfByteArrays.get(i), zos, "Document" + (i + 1) + ".pdf");
             }
 

@@ -28,7 +28,7 @@ The "UserData" project efficiently manages user data with core features includin
   - 
 
 - **Delete:**
-  - 
+  - in HardDeleteStrategy where the appropriate delete method is called by the userType where it implements a OCP (open-closed principle) 
 
 #### Template Pattern:
 
@@ -44,5 +44,7 @@ The "UserData" project efficiently manages user data with core features includin
   - 
 
 - **Delete:**
-  - 
+  - in DeletionStrategy, where one of the deletion types (DeleteUserHardType or SoftDelete) is chosen at runtime without modifying the client code.
+    It also made the code encapsulated and easy to replace.
+
 

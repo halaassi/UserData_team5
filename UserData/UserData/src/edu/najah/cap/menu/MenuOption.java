@@ -1,7 +1,7 @@
 package edu.najah.cap.menu;
 public class MenuOption
 {
-    public void diplay()
+    public void display()
     {
         System.out.println("what do you want to do");
         System.out.println("""

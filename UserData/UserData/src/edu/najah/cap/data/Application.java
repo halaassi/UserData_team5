@@ -3,8 +3,6 @@ import edu.najah.cap.ExceptionHandling.*;
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.activity.UserActivityService;
-import edu.najah.cap.exceptions.BadRequestException;
-import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.exceptions.Util;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
@@ -42,34 +40,28 @@ public class Application {
         setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
 
-        try {
-            Util.validateUserName(getLoginUserName());
             try {
                 UtilException.validateName(getLoginUserName());
                 MenuOption menuOption;
                 menuOption = new MenuOption();
                 for (int i = 0; i < 6; i++) {
-                    menuOption.diplay();
+                    menuOption.display(); // Corrected the typo in method name
                     int num = Integer.parseInt(scanner.nextLine());
                     Menu menu = new SwitchMenu();
                     menu.menu(num);
                     logger.info("Performed menu option: " + num);
-                    logger.info("Performed menu option: " + num);
                     logger.getAllAppenders();
+
+                    try {
+                        Thread.sleep(1000); // 1000 milliseconds (1 second) delay
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-            try {
-                Thread.sleep(1000); // 1000 milliseconds (1 second) delay
-            }
-            catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
             } catch (validateuser e) {
                 throw new validateuser("Validation failed: " + e.getMessage());
             }
-        } catch (SystemBusyException|BadRequestException e) {
-        throw new RuntimeException(e);
 
-        }
 
 
         //TODO Your application ends here. Do not Change the existing code

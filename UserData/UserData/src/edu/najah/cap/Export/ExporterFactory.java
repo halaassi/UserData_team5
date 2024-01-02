@@ -16,7 +16,7 @@ public class ExporterFactory {
                PostExporter postExporter= new PostExporter();
                return  postExporter;
             default:
-                throw new IllegalArgumentException("Unsupported data type: " + dataType);
+                throw new IllegalArgumentException("The service does not exist : " + dataType);
         }
     }
 }

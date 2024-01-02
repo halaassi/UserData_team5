@@ -5,11 +5,13 @@ import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.iam.UserService;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 public class UserProfileExporter implements Exporter {
+    private final Logger logger = Logger.getLogger(getClass());
 
     private String formatUserProfile(UserProfile userProfile) {
         return "User Name: " + userProfile.getUserName() + "First Name: " + userProfile.getFirstName() +"Last Name: " + userProfile.getLastName() +"phone: " + userProfile.getPhoneNumber() +", Email: " + userProfile.getEmail() +", Password: " + userProfile.getPassword() +", Role: " + userProfile.getRole() +", Department: " + userProfile.getDepartment() +", Organization: " + userProfile.getOrganization() +", Country: " + userProfile.getCountry() +", city: " + userProfile.getCity() +", street: " + userProfile.getStreet() +", postal: " + userProfile.getPostalCode()+", building: " + userProfile.getBuilding();
@@ -26,7 +28,7 @@ public class UserProfileExporter implements Exporter {
                 PdfExporter.exportDataToPdf(data, pdfFilePath);
                 System.out.println("User profile data exported to: " + pdfFilePath);
             } catch (IOException e) {
-                throw new RuntimeException("Error exporting UserProfile data to PDF", e);
+                logger.error("Error exporting UserProfile data to PDF", e);
             }
         } catch (SystemBusyException e) {
             System.out.println("System busy, unable to retrieve user. Please try again later.");

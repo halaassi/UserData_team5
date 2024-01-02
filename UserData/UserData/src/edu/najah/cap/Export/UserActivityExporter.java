@@ -5,6 +5,7 @@ import edu.najah.cap.activity.UserActivityService;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserActivityExporter implements Exporter {
+    private final Logger logger = Logger.getLogger(getClass());
 
     private String formatUserActivity(UserActivity activity) {
         return "Activity: " + activity.getActivityType() + ", Time: " + activity.getActivityDate();
@@ -34,7 +36,7 @@ public class UserActivityExporter implements Exporter {
                 PdfExporter.exportDataToPdf(data, pdfFilePath);
                 System.out.println("UserActivity data exported to: " + pdfFilePath);
             } catch (IOException e) {
-                throw new RuntimeException("Error exporting UserActivity data to PDF", e);
+                logger.error("Error exporting UserActivity data to PDF", e);
             }
         } catch (SystemBusyException e) {
         System.out.println("System busy, unable to retrieve user activities. Please try again later.");

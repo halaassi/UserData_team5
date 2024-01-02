@@ -37,21 +37,22 @@ public class SwitchMenu implements Menu {
         UserType userType = userProfile.getUserType();
         int retryCount = 0;
 
-
         switch (index) {
             case 1:
-
-                ExportService exportService = new ExportService(new ExporterFactory());
-                IUserType userTypeToExport = GetUserType.getUserType(getLoginUserName());
-                System.out.println(userTypeToExport);
                 try {
-                    userTypeToExport.exportUserData(exportService, getLoginUserName());
-                    logger.info("Exporting data completed for user : "+getLoginUserName());
-
+                    IsUserDeleted userDeleted = new UserDeleted();
+                    if (userDeleted.isUserDeleted(getLoginUserName())) {
+                        logger.info("Cannot export data for deleted user : "+getLoginUserName());
+                    } else {
+                        ExportService exportService = new ExportService(new ExporterFactory());
+                        IUserType userTypeToExport = GetUserType.getUserType(getLoginUserName());
+                        System.out.println(userTypeToExport);
+                        userTypeToExport.exportUserData(exportService, getLoginUserName());
+                        logger.info("Exporting data completed for user : "+getLoginUserName());
+                    }
                 } catch (SystemBusyException | BadRequestException | NotFoundException e) {
                     throw new RuntimeException(e);
                 }
-
                 return true;
 
 

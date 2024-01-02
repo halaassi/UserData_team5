@@ -8,6 +8,7 @@ import edu.najah.cap.iam.UserService;
 import edu.najah.cap.iam.UserType;
 
 public class GetUserType {
+
     public static IUserType getUserType(String userName) {
         UserProfile userProfile = new UserProfile();
         IUserService userService = new UserService();
@@ -22,7 +23,7 @@ public class GetUserType {
                     throw new RuntimeException("Error getting user type for user: " + userName, e);
                 }
                try {
-                    Thread.sleep(1000 * (i + 1));
+                    Thread.sleep(1000 * (i + 1)); // Wait time increases with each retry
                 } catch (InterruptedException ie) {
                     Thread.currentThread().interrupt();
                 }

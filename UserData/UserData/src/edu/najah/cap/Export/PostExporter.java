@@ -5,12 +5,16 @@ import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.posts.Post;
 import edu.najah.cap.posts.PostService;
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class PostExporter implements Exporter {
+    private final Logger logger = Logger.getLogger(getClass());
+
     private String formatPost(Post post) {
         return "Title: " + post.getTitle() +"Body: " + post.getBody() + ", user: " + post.getAuthor();
     }
@@ -31,7 +35,7 @@ public class PostExporter implements Exporter {
             PdfExporter.exportDataToPdf(data, pdfFilePath);
             System.out.println("Post data exported to: " + pdfFilePath);
         } catch (IOException e) {
-            throw new RuntimeException("Error exporting Post data to PDF", e);
+            logger.error("Error exporting Post data to PDF", e);
         }
     }
 

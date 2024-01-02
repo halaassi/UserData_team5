@@ -52,5 +52,6 @@ The "UserData" project efficiently manages user data with core features includin
 
 ## Class Digram 
   - [Go to Class Digram ](https://drive.google.com/file/d/1mZE7ioiMUvjjc3UjM0p5xxO26OpQxIey/view?usp=sharing)
+
 ![exported_from_idea drawio (1)](https://github.com/halaassi/UserData_team5/assets/92643585/37d7c201-f7cc-4520-a690-293c6ad9cee1)
 

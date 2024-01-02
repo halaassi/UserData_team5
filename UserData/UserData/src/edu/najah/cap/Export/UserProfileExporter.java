@@ -31,10 +31,9 @@ public class UserProfileExporter implements Exporter {
                 logger.error("Error exporting UserProfile data to PDF", e);
             }
         } catch (SystemBusyException e) {
-            System.out.println("System busy, unable to retrieve user. Please try again later.");
+            logger.info("System busy, unable to retrieve user. Please try again later.");
         }
     }
-
     UserProfile getRetry(String userName) throws SystemBusyException, BadRequestException, NotFoundException {
         int maxRetries = 3;
         int retryCount = 0;
@@ -45,7 +44,7 @@ public class UserProfileExporter implements Exporter {
             } catch (SystemBusyException e) {
                 retryCount++;
                 if (retryCount < maxRetries) {
-                    System.out.println("System busy, retrying in 1 second...");
+                    logger.info("System busy, retrying in 1 second...");
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {

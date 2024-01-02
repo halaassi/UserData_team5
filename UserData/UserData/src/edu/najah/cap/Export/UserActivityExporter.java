@@ -34,12 +34,12 @@ public class UserActivityExporter implements Exporter {
 
             try {
                 PdfExporter.exportDataToPdf(data, pdfFilePath);
-                System.out.println("UserActivity data exported to: " + pdfFilePath);
+                logger.info("UserActivity data exported to: " + pdfFilePath);
             } catch (IOException e) {
                 logger.error("Error exporting UserActivity data to PDF", e);
             }
         } catch (SystemBusyException e) {
-        System.out.println("System busy, unable to retrieve user activities. Please try again later.");
+        logger.info("System busy, unable to retrieve user activities. Please try again later.");
     }
     }
 

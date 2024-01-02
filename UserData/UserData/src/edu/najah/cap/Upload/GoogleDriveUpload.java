@@ -1,7 +1,6 @@
 package edu.najah.cap.Upload;
 
-import edu.najah.cap.IsUserDelete.IsUserDeleted;
-import edu.najah.cap.IsUserDelete.UserDeleted;
+
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;

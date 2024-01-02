@@ -10,7 +10,7 @@ public class PremiumIUser implements IUserType {
     public void exportUserData(ExportService exportService, String loginUserName) throws SystemBusyException, BadRequestException, NotFoundException {
         exportService.exportData("UserActivity", loginUserName, "UserActivityForPREMIUM_USER");
         exportService.exportData("Payment", loginUserName, "PaymentForPREMIUM_USER");
-       exportService.exportData("UserProfile", loginUserName, "UserProfileForREMIUM_USER");
-       exportService.exportData("Post", loginUserName, "PostForPREMIUM_USER");
+        exportService.exportData("UserProfile", loginUserName, "UserProfileForREMIUM_USER");
+        exportService.exportData("Post", loginUserName, "PostForPREMIUM_USER");
     }
 }

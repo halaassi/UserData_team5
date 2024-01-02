@@ -1,10 +1,12 @@
 package edu.najah.cap.display;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.iam.*;
+import org.apache.log4j.Logger;
 
 
 public class Display implements displayUser{
     UserService userService = new UserService();
+    private final Logger logger = Logger.getLogger(getClass());
 
     @Override
     public void displayUserData(String userName) {
@@ -18,7 +20,7 @@ public class Display implements displayUser{
                 throw new NotFoundException(" User does not exist");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.info("User does not exist") ;
         }
     }
         private void displayUserDetails(UserProfile user) {
@@ -26,6 +28,5 @@ public class Display implements displayUser{
             System.out.println("Username: " + user.getUserName());
             System.out.println("First Name: " + user.getFirstName());
             System.out.println("Last Name: " + user.getLastName());
-            System.out.println("Email: " + user.getEmail());
         }
 }

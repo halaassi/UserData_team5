@@ -70,9 +70,7 @@ public class ConvertAccordingToUser {
                 }
             }
 
-
         } catch (IOException | SystemBusyException | BadRequestException | NotFoundException e) {
-            // Handle exceptions
             logger.error("Error during creating zip", e);
         }
         return pdfByteArrays;

@@ -7,7 +7,6 @@ public class SoftDelete implements DeletionStrategy {
     @Override
     public void delete(UserProfile user,String userType) {
         try {
-            // Soft delete: Users can clear everything except basic information such as username and email.
             user.setPhoneNumber(null);
             user.setPassword(null);
             user.setRole(null);

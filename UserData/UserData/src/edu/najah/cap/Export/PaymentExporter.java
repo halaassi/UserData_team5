@@ -41,7 +41,7 @@ public class PaymentExporter implements Exporter {
                 logger.error("Error exporting Payment data to PDF", e);
             }
         } catch (SystemBusyException e) {
-            System.err.println("System busy, unable to retrieve transactions. Please try again later.");
+            logger.info("System busy, unable to retrieve transactions. Please try again later.");
         }
     }
 

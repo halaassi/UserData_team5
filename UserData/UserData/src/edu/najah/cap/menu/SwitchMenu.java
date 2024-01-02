@@ -90,7 +90,7 @@ public class SwitchMenu implements Menu {
 
                 break;
             case 3:
-                System.out.println("if you need to Soft delete Click 1 and if you need to hard delete Click 2 ");
+                System.out.println("if you want to Soft delete Click 1 and if you want to hard delete Click 2 ");
                 double num1 = Double.parseDouble(scanner.nextLine());
                 DeletionStrategy deletionStrategy;
 
@@ -108,6 +108,9 @@ public class SwitchMenu implements Menu {
                             deletionStrategy = new HardDeleteStrategy();
                             deletionStrategy.delete(userToDelete, String.valueOf(userType));
                         }
+                        else{
+                            logger.error("The selected choice is wrong");
+                        }
                         break;
                     } catch (Exception e) {
                         logger.error("Error while hard deleting user. Retrying...");
@@ -124,14 +127,14 @@ public class SwitchMenu implements Menu {
                 displayUser.displayUserData(getLoginUserName());
                 break;
             case 5:
-                System.out.println("add user name ");
+                System.out.println("Add user name ");
                 String userName = scanner.nextLine();
                 UsarAddFromUser adduser;
-                adduser = new adduserfromuser();
+                adduser = new AddUserfromUser();
                 adduser.add(userName);
                 break;
             case 6:
-                System.out.println("exit the program. Goodbye!");
+                System.out.println("Exit the program. Goodbye!");
                 System.exit(0);
                 break;
             default:

@@ -26,7 +26,7 @@ public class HardDeleteStrategy implements DeletionStrategy
         {
             throw new IllegalArgumentException("Invalid userType: " + userType);
         }
-        deleteUserHardType.deleteuser(user);
+        deleteUserHardType.deleteUser(user);
         logger.info("Hard delete completed for user: " + user.getUserName());
         FileWriterUsername.saveUsernameToFile(user.getUserName());
 

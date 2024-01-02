@@ -8,7 +8,7 @@ import edu.najah.cap.iam.*;
 
 public class PremiumUserDelete implements DeleteUserHardType{
     @Override
-    public void deleteuser(UserProfile user) {
+    public void deleteUser(UserProfile user) {
 
         UserActivityService userActivityService = new UserActivityService();
         PaymentService paymentService = new PaymentService();

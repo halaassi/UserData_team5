@@ -3,8 +3,6 @@ import edu.najah.cap.ExceptionHandling.*;
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.activity.UserActivityService;
-import edu.najah.cap.exceptions.BadRequestException;
-import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.exceptions.Util;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
@@ -60,8 +58,8 @@ public class Application {
             catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        } catch (validateuser e) {
-            throw new validateuser("Validation failed: " + e.getMessage());
+        } catch (ValidateUser e) {
+            throw new ValidateUser("Validation failed: " + e.getMessage());
         }
 
 

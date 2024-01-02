@@ -3,7 +3,7 @@ import edu.najah.cap.IsUserDelete.*;
 import edu.najah.cap.iam.*;
 
 
-public class adduserfromuser implements UsarAddFromUser {
+public class AddUserfromUser implements UsarAddFromUser {
     UserService userService = new UserService();
     @Override
     public void add(String user) {

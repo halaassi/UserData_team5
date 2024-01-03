@@ -1,4 +1,4 @@
-# UserData_team5
+![chatuml-diagram (8)](https://github.com/halaassi/UserData_team5/assets/92643585/2a692f64-21d8-4797-aa85-76521a468b5b)# UserData_team5
 
 ## Project Overview
 
@@ -50,10 +50,14 @@ The "UserData" project efficiently manages user data with core features includin
   - in DeletionStrategy, where one of the deletion types (DeleteUserHardType or SoftDelete) is chosen at runtime without modifying the client code.
     It also made the code encapsulated and easy to replace.
 ### Digrams
+
 #### Concrete Architecture
-![chatuml-diagram (7)](https://github.com/halaassi/UserData_team5/assets/92643585/a9b13769-b1c4-401a-b837-3ba04001037a)
+
+![chatuml-diagram (8)](https://github.com/halaassi/UserData_team5/assets/92643585/d2f765ef-b431-44db-9afd-a2295b8c26bf)
+
 
 #### Class Digram 
+
   - [Go to Class Digram ](https://drive.google.com/file/d/1mZE7ioiMUvjjc3UjM0p5xxO26OpQxIey/view?usp=sharing)
 
 ![exported_from_idea drawio (1)](https://github.com/halaassi/UserData_team5/assets/92643585/37d7c201-f7cc-4520-a690-293c6ad9cee1)
